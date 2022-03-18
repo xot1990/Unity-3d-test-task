@@ -10,18 +10,21 @@ public class Cube : MonoBehaviour
     public Transform target;
     public Transform startPos;
 
+    private Vector3 dir;
+
     
     void Start()
     {
         startPos = transform;
+        dir = (target.position - startPos.position).normalized;
     }
 
     
     void Update()
     {
-        transform.Translate((target.position - startPos.position).normalized * Time.deltaTime * speed);
+        transform.position += dir * Time.deltaTime * speed;
 
-        Debug.Log(Vector3.Distance(transform.position, mather.transform.position));
+        
         if (Vector3.Distance(transform.position, mather.transform.position) >= range)
             Destroy(gameObject);
     }
